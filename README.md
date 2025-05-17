@@ -1,1 +1,1 @@
-# game
+# This pet project, directed on maintaining python in tone!
