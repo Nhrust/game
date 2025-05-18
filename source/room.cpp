@@ -1,7 +1,9 @@
 #include "room.hpp"
 
-Room::Room()
-{
+
+
+
+Room::Room() {
     size_w = 0;
     size_h = 0;
     cells = nullptr;
@@ -9,19 +11,16 @@ Room::Room()
     rect = RectangleShape(cells_size);
 }
 
-Room::Room(int width, int heigth)
-{
+Room::Room(int width, int heigth) {
     size_w = width;
     size_h = heigth;
     cells = new int [width * heigth];
     cells_size = Vector2f(10,10);
     rect = RectangleShape(cells_size);
-    
-
 }
 
-void Room::load(string filepath)
-{
+
+void Room::load(string filepath) {
     delete cells;
     ifstream stream(filepath);
     stream >> size_w >> size_h;
@@ -40,27 +39,25 @@ void Room::load(string filepath)
         }
     }
     stream.close();
-    
 }
 
-void Room::draw(RenderTarget *target)
-{
-    for (int i = 0; i < size_w*size_h; i++) {
-        int y = i/size_w;
-        int x = i-y*size_w;
-        rect.setPosition(Vector2f(x*cells_size.x,y*cells_size.y));
-        if (cells[i] == 0) {
-            rect.setFillColor(Color(100,200,100));
-        }
-        else {
+void Room::draw(RenderTarget *target) {
+    for (int i = 0; i < size_w * size_h; i++) {
+        int y = i / size_w;
+        int x = i - y * size_w;
+        
+        rect.setPosition(Vector2f(x * cells_size.x, y * cells_size.y));
+        
+        if (cells[i])
             rect.setFillColor(Color(10,50,10));
-        }
+        else
+            rect.setFillColor(Color(100,200,100));
+        
         target->draw(rect);
-
     }
 }
 
-Room::~Room()
-{
+
+Room::~Room() {
     delete cells;
 }
