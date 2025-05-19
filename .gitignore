@@ -1,3 +1,4 @@
 temp/
+build/
 .vscode/
-game
+game*
